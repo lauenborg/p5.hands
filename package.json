@@ -1,6 +1,6 @@
 {
   "name": "p5.hands",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Friendly hand tracking for p5.js — a wrapper around ml5.js HandPose for beginners",
   "main": "dist/p5.hands.js",
   "files": [
