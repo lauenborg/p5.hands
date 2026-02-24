@@ -1,22 +1,19 @@
 # p5.Hands
 
-**Friendly hand tracking for p5.js** — a wrapper around [ml5.js HandPose](https://docs.ml5js.org/#/reference/handpose) that makes hand tracking dead simple for beginners.
+**Friendly hand tracking for p5.js**: A wrapper around [ml5.js HandPose](https://docs.ml5js.org/#/reference/handpose) that makes hand tracking dead simple for beginners.
 
-3 lines to get hand tracking working. 35+ helper functions for points, gestures, and drawing.
+1 line to get hand tracking working. 35+ helper functions for points, gestures, and drawing.
 
 ## Quick Start
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
-<script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
-<script src="p5.hands.js"></script>
-<script src="sketch.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.hands/dist/p5.hands.min.js"></script>
 ```
 
 ```js
 function setup() {
   createCanvas(640, 480);
-  initHands();
+  initHands(); // This is all you need!
 }
 
 function draw() {
