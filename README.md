@@ -474,4 +474,3 @@ p5.Hands wraps the [ml5.js HandPose](https://docs.ml5js.org/#/reference/handpose
 ## License
 
 MIT
-# p5.hands
