@@ -33,25 +33,29 @@ That's it. You now have color-coded hand tracking with skeleton lines, landmark 
 Each hand has 21 keypoints. The library lets you access them by friendly name instead of memorizing index numbers.
 
 ```
-                    MIDDLE(12)
-                      |
-            INDEX(8)  |  RING(16)
-              |       |    |    PINKY(20)
-              |       |    |      |
-              7      11   15     19
-              |       |    |      |
-              6      10   14     18
-              |       |    |      |
-         4    5       9   13     17
-         |        \   |   |    /
-         3          \ |  /   /
-         |           \| /  /
-         2            +--+
-         |            |  |
-         1            |  |
-          \           |  |
-            ----  0  ----
-                WRIST
+                  MIDDLE(12)
+                    |
+          INDEX(8)  |  RING(16)
+             |      |     |   PINKY(20)
+             |      |     |      |
+             7     11    15     19
+             |      |     |      |
+             6     10    14     18
+             |      |     |      |
+             5      9    13     17
+              \     |     |    /
+               \    |     |   /
+          4     \   |     |  /
+          |      +--+--+--+-+
+          3     /             \
+          |    /               \
+          2   |                 |
+          |   |                 |
+          1   |                 |
+           \   \               /
+            \ _ \             /
+                 +--- 0 ----+
+                    WRIST
 ```
 
 | Index | Name | Shortcut |
