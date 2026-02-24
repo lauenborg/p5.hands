@@ -9,8 +9,7 @@ function setup() {
 }
 
 function draw() {
-  //drawVideo();
-  background(30);
+  drawVideo();
   drawHands();
-  //drawHandsStatus();
+  drawHandsStatus();
 }
