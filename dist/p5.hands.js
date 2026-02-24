@@ -375,10 +375,18 @@
     }
     var hand = _resolveHand(which);
     if (!hand || !hand.keypoints) return false;
-    var wrist = hand.keypoints[KP.wrist];
     var tip = _getKeypoint(hand, TIP_NAMES[finger]);
     var pip = _getKeypoint(hand, PIP_NAMES[finger]);
-    if (!tip || !pip || !wrist) return false;
+    if (!tip || !pip) return false;
+    // Thumb folds across the palm (toward index base), not toward the wrist,
+    // so use the index finger MCP as the reference point instead of the wrist.
+    if (finger === "thumb") {
+      var ref = hand.keypoints[KP.index_finger_mcp];
+      if (!ref) return false;
+      return _dist(tip, ref) > _dist(pip, ref);
+    }
+    var wrist = hand.keypoints[KP.wrist];
+    if (!wrist) return false;
     return _dist(tip, wrist) > _dist(pip, wrist);
   };
 
