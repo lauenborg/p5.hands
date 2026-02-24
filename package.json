@@ -1,0 +1,42 @@
+{
+  "name": "p5.hands",
+  "version": "1.0.0",
+  "description": "Friendly hand tracking for p5.js — a wrapper around ml5.js HandPose for beginners",
+  "main": "dist/p5.hands.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "mkdir -p dist && cp p5.hands.js dist/p5.hands.js && npx terser p5.hands.js -o dist/p5.hands.min.js -c -m"
+  },
+  "keywords": [
+    "p5",
+    "p5js",
+    "p5.js",
+    "ml5",
+    "ml5js",
+    "handpose",
+    "hand-tracking",
+    "gesture",
+    "creative-coding",
+    "webcam",
+    "tensorflow"
+  ],
+  "author": "p5.Hands contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauenborg/p5.hands.git"
+  },
+  "homepage": "https://github.com/lauenborg/p5.hands#readme",
+  "bugs": {
+    "url": "https://github.com/lauenborg/p5.hands/issues"
+  },
+  "peerDependencies": {
+    "p5": ">=1.0.0",
+    "ml5": ">=1.0.0"
+  },
+  "devDependencies": {
+    "terser": "^5.0.0"
+  }
+}
