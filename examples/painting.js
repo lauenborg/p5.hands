@@ -15,7 +15,7 @@ let colorIndex = 0;
 
 function setup() {
   createCanvas(640, 480);
-  initHands({ maxHands: 2, flipped: true });
+  initHands({ maxHands: 2 });
 
   palette = [
     color(255, 100, 200), // pink

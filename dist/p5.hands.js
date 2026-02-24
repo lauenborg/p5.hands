@@ -30,7 +30,7 @@
   var _running = false;
   var _connections = null;
   var _smoothing = 0.3;
-  var _flipped = false;
+  var _flipped = true;
   var _pInst = null;
   var _videoW = 640;
   var _videoH = 480;
@@ -175,8 +175,8 @@
     _videoH = options.height || 480;
 
     var modelOpts = { maxHands: options.maxHands || 2 };
-    _flipped = !!options.flipped;
-    if (options.flipped !== undefined) modelOpts.flipped = options.flipped;
+    _flipped = options.flipped !== undefined ? !!options.flipped : true;
+    modelOpts.flipped = _flipped;
     if (options.runtime) modelOpts.runtime = options.runtime;
     if (options.modelType) modelOpts.modelType = options.modelType;
 
@@ -222,7 +222,7 @@
    *
    * Options:
    *   maxHands  — number of hands to detect (default 2)
-   *   flipped   — mirror the detection (default false)
+   *   flipped   — mirror the video like a selfie (default true, set false to disable)
    *   smoothing — 0 to 1, higher = smoother but laggier (default 0.3)
    *   width     — video width  (default 640)
    *   height    — video height (default 480)
@@ -235,8 +235,8 @@
     _videoH = options.height || 480;
 
     var modelOpts = { maxHands: options.maxHands || 2 };
-    _flipped = !!options.flipped;
-    if (options.flipped !== undefined) modelOpts.flipped = options.flipped;
+    _flipped = options.flipped !== undefined ? !!options.flipped : true;
+    modelOpts.flipped = _flipped;
     if (options.runtime) modelOpts.runtime = options.runtime;
     if (options.modelType) modelOpts.modelType = options.modelType;
 

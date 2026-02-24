@@ -5,7 +5,7 @@
 
 function setup() {
   createCanvas(640, 480);
-  initHands({ flipped: true });
+  initHands();
 }
 
 function draw() {

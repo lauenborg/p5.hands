@@ -6,7 +6,7 @@
 
 function setup() {
   createCanvas(640, 480);
-  initHands({ smoothing: 0.5, flipped: true }); // extra smooth for puppet control
+  initHands({ smoothing: 0.5 }); // extra smooth for puppet control
 }
 
 function draw() {

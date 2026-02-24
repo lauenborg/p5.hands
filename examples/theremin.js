@@ -9,7 +9,7 @@ let audioStarted = false;
 
 function setup() {
   createCanvas(640, 480);
-  initHands({ maxHands: 2, flipped: true });
+  initHands({ maxHands: 2 });
 }
 
 function draw() {

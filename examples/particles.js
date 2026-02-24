@@ -7,7 +7,7 @@ let particles = [];
 
 function setup() {
   createCanvas(640, 480);
-  initHands({ smoothing: 0.4, flipped: true });
+  initHands({ smoothing: 0.4 });
 }
 
 function draw() {
