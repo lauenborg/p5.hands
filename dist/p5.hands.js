@@ -133,10 +133,11 @@
       var raw = rawHands[hi];
       var prev = _smoothedHands.find(function (h) { return h.handedness === raw.handedness; });
       if (!prev || !prev.keypoints) {
-        result.push(JSON.parse(JSON.stringify(raw)));
+        try { result.push(JSON.parse(JSON.stringify(raw))); } catch (e) { result.push(raw); }
         continue;
       }
-      var smoothed = JSON.parse(JSON.stringify(raw));
+      var smoothed;
+      try { smoothed = JSON.parse(JSON.stringify(raw)); } catch (e) { result.push(raw); continue; }
       for (var i = 0; i < smoothed.keypoints.length; i++) {
         if (prev.keypoints[i]) {
           smoothed.keypoints[i].x = _lerp(prev.keypoints[i].x, raw.keypoints[i].x, t);
@@ -170,7 +171,7 @@
   p5.prototype.loadHands = function (options) {
     _pInst = this;
     options = options || {};
-    _smoothing = options.smoothing !== undefined ? options.smoothing : 0.3;
+    _smoothing = Math.max(0, Math.min(1, options.smoothing !== undefined ? options.smoothing : 0.3));
     _videoW = options.width || 640;
     _videoH = options.height || 480;
 
@@ -204,7 +205,11 @@
       _video.size(w, h);
       _video.hide();
     }
-    if (_model && !_running) {
+    if (!_model) {
+      console.warn("p5.Hands: startHands() called before loadHands() finished — detection will not start.");
+      return;
+    }
+    if (!_running) {
       if (_model.getConnections) _connections = _model.getConnections();
       _model.detectStart(_video, _handleResults);
       _running = true;
@@ -230,7 +235,7 @@
   p5.prototype.initHands = function (options) {
     _pInst = this;
     options = options || {};
-    _smoothing = options.smoothing !== undefined ? options.smoothing : 0.3;
+    _smoothing = Math.max(0, Math.min(1, options.smoothing !== undefined ? options.smoothing : 0.3));
     _videoW = options.width || 640;
     _videoH = options.height || 480;
 
@@ -239,6 +244,14 @@
     modelOpts.flipped = _flipped;
     if (options.runtime) modelOpts.runtime = options.runtime;
     if (options.modelType) modelOpts.modelType = options.modelType;
+
+    if (_video) {
+      if (_model && _running) { _model.detectStop(); _running = false; }
+      _model = null;
+      _video.remove();
+      _video = null;
+      _ready = false;
+    }
 
     _video = this.createCapture(this.VIDEO);
     _video.size(_videoW, _videoH);
@@ -510,6 +523,7 @@
     var count = fingers.filter(Boolean).length;
     if (num === 5) return count === 4 && f.thumb;
     if (num === 0) return count === 0 && !f.thumb;
+    if (num === 1) return f.index && !f.middle && !f.ring && !f.pinky && !f.thumb;
     return count === num && !f.thumb;
   };
 
@@ -589,9 +603,11 @@
    */
   p5.prototype.mapHandPoint = function (pt) {
     if (!pt || !_video || !_pInst) return pt;
+    var vw = _video.width, vh = _video.height;
+    if (!vw || !vh) return pt;
     return {
-      x: (pt.x / _video.width) * _pInst.width,
-      y: (pt.y / _video.height) * _pInst.height
+      x: (pt.x / vw) * _pInst.width,
+      y: (pt.y / vh) * _pInst.height
     };
   };
 
